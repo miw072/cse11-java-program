@@ -22,9 +22,17 @@ public class Cryptor
 	    boolean isEncode = true;
 		StreamPair pair;
         HashSet<String> algoSet = new HashSet<String>();
+		HashSet<String> commandSet = new HashSet<String>();
+		
 		algoSet.add("plain");
 		algoSet.add("rot13");
 		algoSet.add("key");
+		
+		commandSet.add("-d");
+		commandSet.add("-e");
+		commandSet.add("-i");
+		commandSet.add("-k");
+		commandSet.add("-o");
 		
 		//check error input
 		if (args.length % 2 != 0){
@@ -32,9 +40,8 @@ public class Cryptor
             return;
         }
 		
-        for (int i = 2; i < args.length; i += 2){
-            if ((!args[i].equals("-d")) && (!args[i].equals("-e")) && (!args[i].equals("-k")) 
-			    && (!args[i].equals("-i")) && (!args[i].equals("-o"))){
+        for (int i = 0; i < args.length; i += 2){
+            if (!commandSet.contains(args[i])){
                     System.out.println("Unknown flag: " + args[i]);
 					errorHelper();
 					return;
@@ -98,14 +105,14 @@ public class Cryptor
 				CryptStream plainStream = new PlainCrypt(pair);
 				cryptHelper(plainStream, isEncode);
 				break;
-			/*case "rot13":
+			case "rot13":
 				CryptStream rot13Stream = new Rot13Crypt(pair);
 				cryptHelper(rot13Stream, isEncode);
 				break;
 			case "key":
-				CryptStream keyStream = new KeyCrypt(pair);
+				CryptStream keyStream = new KeyCrypt(pair, key);
 				cryptHelper(keyStream, isEncode);
-				break;*/
+				break;
 			default:
 			    break;
 		}
@@ -122,7 +129,7 @@ public class Cryptor
 			}
 		}else{
 			try{
-				stream.encrypt();
+				stream.decrypt();
 			}catch(IOException e){
 			    System.err.println(e);
 				errorHelper();
