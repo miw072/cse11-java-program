@@ -1,5 +1,5 @@
 /** A class that encrypts/decrypts
- * @author YOUR NAME HERE
+ * @author Mingxuan Wang
  * @version 12/Feb/2015
  */
 
@@ -38,18 +38,18 @@ public abstract class CryptStream
 	*/
 	public final int encrypt() throws IOException
 	{
-	    int i;
-		int len = 0;
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        while ((i = streams.getInput().read()) != -1){
-		    byte c = (byte) i;
-            baos.write(c);
-            len ++;			
-		}
-    	byte[] arr = baos.toByteArray();
-		byte[] code = cryptData(arr, len);
-		streams.getOutput().write(code);
-		return code.length;
+            int i;
+            int len = 0;
+	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            while ((i = streams.getInput().read()) != -1){
+     	        byte c = (byte) i;
+                baos.write(c);
+                len ++;			
+	    }
+ 	    byte[] arr = baos.toByteArray();
+	    byte[] code = cryptData(arr, len);
+	    streams.getOutput().write(code);
+	    return code.length;
 	}
 	/** decrypt the input stream, and write to the output stream of 
      * of the StreamPair 
@@ -57,18 +57,18 @@ public abstract class CryptStream
 	*/
 	public final int decrypt() throws IOException
 	{
-		int i;
-		int len = 0;
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        while ((i = streams.getInput().read()) != -1){
-		    byte c = (byte) i;
-            baos.write(c);
-            len ++;			
-		}
-    	byte[] arr = baos.toByteArray();
-		byte[] origin = decryptData(arr, len);
-		streams.getOutput().write(origin);
-		return origin.length;
+	    int i;
+	    int len = 0;
+	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            while ((i = streams.getInput().read()) != -1){
+		 byte c = (byte) i;
+                 baos.write(c);
+                 len ++;			
+	    }
+    	    byte[] arr = baos.toByteArray();
+	    byte[] origin = decryptData(arr, len);
+	    streams.getOutput().write(origin);
+	    return origin.length;
 	}
 
 }

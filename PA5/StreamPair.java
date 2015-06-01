@@ -1,6 +1,6 @@
 /** Create a pair of InputStream/OutputStream  objects
  * based what was asked for in the constructor
- * @author YOUR NAME HERE
+ * @author Mingxuan Wang
  * @version 15 Feb 2015
  */
 import java.io.*;
@@ -52,12 +52,12 @@ public class StreamPair
 	 */
 	public void close() throws IOException
 	{
-        if (in != null) {
-            in.close();
-        }
-         if (out != null) {
-            out.close();
-        }
+            if (in != null) {
+               in.close();
+            }
+            if (out != null) {
+               out.close();
+            }
 	}
 }
 // vim: ts=4:sw=4:tw=78
